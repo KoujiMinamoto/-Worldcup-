@@ -1,8 +1,14 @@
 #BlueJ class context
 comment0.target=Team
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Team\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=TeamName
-comment1.target=void\ setName(java.lang.String)
-comment2.params=
-comment2.target=java.lang.String\ getName()
-numComments=3
+comment1.params=
+comment1.target=void\ displayTeamrecord()
+comment2.params=TeamName
+comment2.target=void\ setName(java.lang.String)
+comment3.params=
+comment3.target=java.lang.String\ getName()
+comment4.params=TeamRank
+comment4.target=void\ setRank(int)
+comment5.params=
+comment5.target=int\ getRank()
+numComments=6

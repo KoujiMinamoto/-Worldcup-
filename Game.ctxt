@@ -1,8 +1,19 @@
 #BlueJ class context
 comment0.target=Game
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Game\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=void\ playGame()
 comment2.params=
-comment2.target=void\ playPenaltyShootOut()
-numComments=3
+comment2.target=void\ Preliminary()
+comment3.params=
+comment3.target=void\ Final()
+comment4.params=
+comment4.target=void\ displayGameResult()
+comment5.params=
+comment5.target=void\ playPenaltyShootOut()
+comment6.params=
+comment6.target=void\ readFile()
+comment7.params=input
+comment7.target=int\ convertStringtoInt(java.lang.String)
+comment8.params=iobuffer
+comment8.target=boolean\ validBlank(java.lang.String)
+numComments=9

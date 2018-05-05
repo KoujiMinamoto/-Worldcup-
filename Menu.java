@@ -1,33 +1,17 @@
 
-/**
- * Write a description of class Menu here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Menu
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Menu
-     */
-    public Menu()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+   public void displaymenu()
+   {
+        System.out.println("World Cup");
+        System.out.println("====================================");
+        System.out.println("A. Play Preliminary Stage ");
+        System.out.println("B. Play Final ");
+        System.out.println("C. Display Teams ");
+        System.out.println("D. Display Players ");
+        System.out.println("E. Display Cup Result ");
+        System.out.println("X. Close  ");
+        System.out.println("====================================");
+        System.out.println("Choose an option:");
+   }
 }

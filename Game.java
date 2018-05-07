@@ -1,12 +1,22 @@
 import java.util.*;
+import java.lang.*;
 import java.io.*;
 
 public class Game
 {
     Team team = new Team();
-    Player player = new Player();
     private Database newteamList;
+    Player player = new Player();
     Menu menu = new Menu();
+    
+    
+    public Game()
+    {
+    
+        newteamList = new Database();
+    
+    }
+
     public void  playGame()
     {
         Team team = new Team();
@@ -109,10 +119,6 @@ public class Game
                 System.out.println ("Team"+ (linecount+1));
                 loadFromFile.setName(attribute[0]);
                 loadFromFile.setRank(convertStringtoInt(attribute[1]));
-                Team newTeam = new Team(); 
-
-                
-
 
                 loadFromFile.displayTeamrecord();
                 newteamList.addteam(loadFromFile);

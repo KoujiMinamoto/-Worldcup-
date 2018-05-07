@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Team
 {
-   private String name;
+   private String name ;
    private int rank, redcards, yellowcards,won,lost,drawn, goals;
    
    

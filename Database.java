@@ -14,7 +14,7 @@ public class Database
     
 
    
-       public boolean addteam (Team newteam)
+    public boolean addteam (Team newteam)
     {
        if (newteam != null)
        {
@@ -24,7 +24,8 @@ public class Database
        return false;
        
     }
-    public int getnumberofplayers()
+    
+   public int getnumberofplayers()
     {
        
        return playerList.size();

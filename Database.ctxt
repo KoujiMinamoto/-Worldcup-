@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Database
+comment1.params=
+comment1.target=Database()
+comment2.params=newteam
+comment2.target=boolean\ addteam(Team)
+comment3.params=
+comment3.target=int\ getnumberofplayers()
+comment4.params=
+comment4.target=java.util.ArrayList\ getTeams()
+comment5.params=
+comment5.target=java.util.ArrayList\ getPlayers()
+comment6.params=name
+comment6.target=boolean\ validname(java.lang.String)
+numComments=7

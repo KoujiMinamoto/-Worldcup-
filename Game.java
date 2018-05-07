@@ -3,14 +3,16 @@ import java.io.*;
 
 public class Game
 {
-    private ArrayList<Team> teamList;
-    Menu menu = new Menu();
     Team team = new Team();
+    Player player = new Player();
+    private Database newteamList;
+    Menu menu = new Menu();
     public void  playGame()
     {
         Team team = new Team();
         readFile();
         boolean exit = false;
+
         Scanner input = new Scanner(System.in);
         while (!exit)
         {
@@ -113,7 +115,7 @@ public class Game
 
 
                 loadFromFile.displayTeamrecord();
-                teamList.add(loadFromFile);
+                newteamList.addteam(loadFromFile);
                 linecount++; 
             }
             inputFile.close();
@@ -128,6 +130,7 @@ public class Game
         }
     }
     
+
     private int convertStringtoInt(String input) //method to convert String to Integer
     {
         //intialised variables
@@ -169,4 +172,6 @@ public class Game
         System.out.println("Error: opition shouldn't be #!123...Please enter again:");
         return true;
     }
+    
+
 }

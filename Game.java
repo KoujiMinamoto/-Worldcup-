@@ -22,6 +22,15 @@ public class Game
         Team team = new Team();
         readFile();
         boolean exit = false;
+        int i = 0;
+        while(i < 4)
+        {
+            ArrayList<Team> resultList = newteamList.getTeams();
+            System.out.println("Please insert playername for "+ resultList.get(i).getName()); 
+            SetPlayerName(i);
+            i++;
+        
+        }
 
         Scanner input = new Scanner(System.in);
         while (!exit)
@@ -67,11 +76,67 @@ public class Game
     
     }
     
-    public void  Preliminary()
+    public void Preliminary()
     {
     
     
     
+    }
+    
+    public void SetPlayerName(int numberofteam)
+    {
+        Player setname;
+        Player set2name;
+        set2name = new Player();
+        setname = new Player();
+        Scanner input = new Scanner(System.in);
+        System.out.println("=== Add Player ===");
+        System.out.println("Please insert 1st playername:"); 
+        String newname = input.nextLine();
+        if(validplayername(newname)==true)
+        {
+            System.out.println("=== Add Player ===");
+            System.out.println("Please insert 1st playername again:"); 
+            String newname1 = input.nextLine();
+            if(validplayername(newname1)==true)
+            {
+                System.out.println("use default name:");
+                setname.setName("");
+                
+            }
+            
+        
+        }
+        else
+        {
+        newname = input.nextLine(); 
+        setname.setName(newname);
+        }
+        newteamList.addplayer(setname);
+        
+        System.out.println("=== Add Player ===");
+        System.out.println("Please insert 2st playername:"); 
+        String new2name = input.nextLine();
+        if(validplayername(new2name)==true)
+        {
+            System.out.println("=== Add Player ===");
+            System.out.println("Please insert 2st playername again:"); 
+            String newname2 = input.nextLine();
+            if(validplayername(newname2)==true)
+            {
+                System.out.println("use default name:");
+                set2name.setName("");
+                
+            }
+            
+        
+        }
+        else
+        {
+        newname = input.nextLine(); 
+        set2name.setName(newname);
+        }
+        newteamList.addplayer(set2name);
     }
     
     public void Final()
@@ -179,5 +244,16 @@ public class Game
         return true;
     }
     
-
+    public boolean validplayername(String playername)
+    {
+       //check if car is not in database , and return false to break while loop
+       boolean isrepeated = newteamList.validname(playername);
+       if (isrepeated)
+       {
+        System.out.println("Error : player name existed , please insert another name!");
+        return isrepeated;
+       }
+        
+       return false;
+    }
 }

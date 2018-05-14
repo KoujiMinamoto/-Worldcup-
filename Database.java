@@ -12,7 +12,13 @@ public class Database
         playerList = new ArrayList<Player>();
     }
     
-
+    public void addplayer(Player newplayer)
+    {
+    
+        playerList.add(newplayer);
+    
+    
+    }
    
     public boolean addteam (Team newteam)
     {

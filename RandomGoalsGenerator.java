@@ -3,15 +3,12 @@ import java.util.Random;
 public class RandomGoalsGenerator
 {
    private int randomNumber;
-    public void GenerateRandomNumber()
+    public int GenerateRandomNumber(int i)
     {
        Random randomObject = new Random();
-       randomNumber = randomObject.nextInt(3);
+       randomNumber = randomObject.nextInt(i+1);
+       return randomNumber;
     }
     
-    public int getrandomNumber()
-    {
-        GenerateRandomNumber();
-        return randomNumber;
-    }
+
 }

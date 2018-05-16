@@ -8,6 +8,7 @@ public class Game
     private Database newteamList;
     Player player = new Player();
     Menu menu = new Menu();
+    RandomGoalsGenerator Random = new RandomGoalsGenerator();
     
     
     public Game()
@@ -78,8 +79,21 @@ public class Game
     
     public void Preliminary()
     {
-    
-    
+        int a= 0;
+        int b = 0;
+        int goala = 0;
+        int goalb = 0;
+        if(newteamList.getTeams().get(a).getRank() > newteamList.getTeams().get(b).getRank())
+        {
+            goala = Random.GenerateRandomNumber(5-newteamList.getTeams().get(a).getRank()+newteamList.getTeams().get(b).getRank()+Random.GenerateRandomNumber(2));
+            goalb = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
+        }
+        else
+        {
+            goalb = Random.GenerateRandomNumber(5-newteamList.getTeams().get(b).getRank()+newteamList.getTeams().get(a).getRank()+Random.GenerateRandomNumber(2));
+            goala = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
+        
+        }
     
     }
     

@@ -31,6 +31,21 @@ public class Database
        
     }
     
+    public void addwin (int win,int drawn, int lose, int y , int r ,int goal ,int a)
+    {
+        getTeams().get(a).setWon(getTeams().get(a).getWon()+win);
+        getTeams().get(a).setDrawn(getTeams().get(a).getDrawn()+drawn);
+        getTeams().get(a).setLost(getTeams().get(a).getLost()+lose);
+        getTeams().get(a).setYellow(getTeams().get(a).getYellow()+y);
+        getTeams().get(a).setRed(getTeams().get(a).getRed()+r);
+        getTeams().get(a).setGoal(getTeams().get(a).getGoal()+goal);
+    }
+    
+    public void addgoal (int goal, int a)
+    {
+        getPlayers().get(a).setGoals(goal);
+    }
+    
    public int getnumberofplayers()
     {
        

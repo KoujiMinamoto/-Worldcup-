@@ -32,7 +32,7 @@ public class Game
             i++;
         
         }
-
+                
         Scanner input = new Scanner(System.in);
         while (!exit)
         {
@@ -49,7 +49,7 @@ public class Game
 
            switch(option)
            {
-                case 'A': 
+                case 'A': Preliminary();
                         break;
                 case 'B': 
                         break;
@@ -80,21 +80,71 @@ public class Game
     public void Preliminary()
     {
         int a= 0;
-        int b = 0;
+        int b;
+        int goalfora = 0;
+        int goalforb = 0;
+        while(a<=3)
+        {
+        b= a+1;
+        while(b<=3)
+        {
+            
+        int reda = 0;
+        int yellowa = 0;
+         int redb = 0;
+        int yellowb = 0;
         int goala = 0;
         int goalb = 0;
-        if(newteamList.getTeams().get(a).getRank() > newteamList.getTeams().get(b).getRank())
+        ArrayList<Team> resultList = newteamList.getTeams();
+        if(resultList.get(a).getRank() > resultList.get(b).getRank())
         {
-            goala = Random.GenerateRandomNumber(5-newteamList.getTeams().get(a).getRank()+newteamList.getTeams().get(b).getRank()+Random.GenerateRandomNumber(2));
+            goala = Random.GenerateRandomNumber(5-resultList.get(a).getRank()+resultList.get(b).getRank()+Random.GenerateRandomNumber(2));
             goalb = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
+            
         }
-        else
+        else if(resultList.get(a).getRank() < resultList.get(b).getRank())
         {
-            goalb = Random.GenerateRandomNumber(5-newteamList.getTeams().get(b).getRank()+newteamList.getTeams().get(a).getRank()+Random.GenerateRandomNumber(2));
+            goalb = Random.GenerateRandomNumber(5-resultList.get(b).getRank()+resultList.get(a).getRank()+Random.GenerateRandomNumber(2));
             goala = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
         
         }
-    
+        else
+        {
+        
+        }
+        
+        reda = Random.GenerateRandomNumber(1);
+        yellowa = Random.GenerateRandomNumber(4);
+        redb = Random.GenerateRandomNumber(1);
+        yellowb = Random.GenerateRandomNumber(4);
+        displayGameResult(resultList.get(a).getName(),resultList.get(b).getName(),goala,goalb,reda,redb,yellowa,yellowb);
+        if(goala>goalb)
+        {
+            newteamList.addwin(1,0,0,yellowa,reda,goala,a);
+            newteamList.addwin(0,0,1,yellowb,redb,goalb,b);
+        }
+        else if(goalb>goala)
+        {
+            newteamList.addwin(0,0,1,yellowa,reda,goala,a);
+            newteamList.addwin(1,0,0,yellowb,redb,goalb,b);
+        }
+        else
+        {
+            newteamList.addwin(0,1,0,yellowa,reda,goala,a);
+            newteamList.addwin(0,1,0,yellowb,redb,goalb,b);
+        }
+        goalfora = Random.GenerateRandomNumber(goala);
+        goalforb = Random.GenerateRandomNumber(goalb);
+        newteamList.addgoal(goalfora,2*a);
+        newteamList.addgoal(goala-goalfora,2*a+1);
+        newteamList.addgoal(goalforb,2*b);
+        newteamList.addgoal(goalb-goalforb,2*b+1);
+        
+        
+        b++;
+        }
+        a++;
+        }
     }
     
     public void SetPlayerName(int numberofteam)
@@ -162,9 +212,31 @@ public class Game
     
     }
     
-    public void displayGameResult()
+    public void displayGameResult(String teama, String teamb , int goala, int goalb ,int reda ,int redb ,int yellowa, int yellowb)
     {
-    
+        System.out.println(teama + goala +" vs. " +teamb + goalb);
+        if(yellowa>0)
+        {
+            if(reda == 0)
+            {
+                System.out.println("Cards awarded:"+ teama + "-" + yellowa + "yellowcard");
+            }
+            else
+            {
+            System.out.println("Cards awarded:"+ teama + "-" + yellowa + "yellowcard  " + reda +"redcard" );
+            }
+        }
+        if(yellowb>0)
+        {
+            if(redb == 0)
+            {
+                System.out.println("Cards awarded:"+ teamb + "-" + yellowb + "yellowcard");
+            }
+            else
+            {
+            System.out.println("Cards awarded:"+ teamb + "-" + yellowb + "yellowcard  " + redb +"redcard" );
+            }
+        }
     
     
     }

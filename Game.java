@@ -138,11 +138,8 @@ public class Game
         }
         goalfora = Random.GenerateRandomNumber(goala);
         goalforb = Random.GenerateRandomNumber(goalb);
-        newteamList.addgoal(goalfora,2*a);
-        newteamList.addgoal(goala-goalfora,2*a+1);
-        newteamList.addgoal(goalforb,2*b);
-        newteamList.addgoal(goalb-goalforb,2*b+1);
-        
+        newteamList.addgoal(goalfora,goala-goalfora,a);
+        newteamList.addgoal(goalforb,goalb-goalforb,b);
         
         b++;
         }
@@ -152,11 +149,7 @@ public class Game
     
     public void SetPlayerName(int numberofteam)
     {
-        Player setname;
-        Player set2name;
         Team ranklist = new Team();
-        set2name = new Player();
-        setname = new Player();
         Scanner input = new Scanner(System.in);
         System.out.println("=== Add Player ===");
         System.out.println("Please insert 1st playername:"); 
@@ -169,18 +162,19 @@ public class Game
             if(validplayername(newname1)==true)
             {
                 System.out.println("use default name:");
-                setname.setName("");
+                newname = "";
                 
             }
-            
+            else
+            {
+                newname = newname1;
+            }
         
         }
         else
         {
         newname = input.nextLine(); 
-        setname.setName(newname);
         }
-        newteamList.addplayer(setname);
         
         System.out.println("=== Add Player ===");
         System.out.println("Please insert 2st playername:"); 
@@ -193,18 +187,21 @@ public class Game
             if(validplayername(newname2)==true)
             {
                 System.out.println("use default name:");
-                set2name.setName("");
+                new2name = "";
                 
+            }
+            else
+            {
+                new2name = newname2;
             }
             
         
         }
         else
         {
-        newname = input.nextLine(); 
-        set2name.setName(newname);
+        new2name = input.nextLine(); 
         }
-        newteamList.addplayer(set2name);
+        newteamList.addplayer(newname,new2name,numberofteam);
     }
     
     public void totalpoint()
@@ -319,10 +316,9 @@ public class Game
         }
         goalfora = Random.GenerateRandomNumber(goala);
         goalforb = Random.GenerateRandomNumber(goalb);
-        newteamList.addgoal(goalfora,2*a);
-        newteamList.addgoal(goala-goalfora,2*a+1);
-        newteamList.addgoal(goalforb,2*b);
-        newteamList.addgoal(goalb-goalforb,2*b+1);
+        newteamList.addgoal(goalfora,goala-goalfora,a);
+        newteamList.addgoal(goalforb,goalb-goalforb,b);
+        
     
     
     

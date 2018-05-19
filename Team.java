@@ -6,6 +6,7 @@ public class Team
    private int rank, redcards, yellowcards,won,lost,drawn, goals,point;
    Player player1;
    Player player2;
+   private ArrayList<Player> playerList;
    
    
    
@@ -104,6 +105,22 @@ public class Team
        return point;
    }
    
+   public void setPlayer1(String player,int goals)
+   {
+       player1.setName(player);
+       player1.setGoals(player1.getGoals()+goals);
+   }
+   
+   public void setPlayer2(String player,int goals)
+   {
+       player2.setName(player);
+       player2.setGoals(player2.getGoals()+goals);
+   }
+   
+   public ArrayList<Player> getPlayer()
+   {
+       return playerList;
+   }
    
    
 }

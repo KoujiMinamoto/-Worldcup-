@@ -12,10 +12,11 @@ public class Database
         playerList = new ArrayList<Player>();
     }
     
-    public void addplayer(Player newplayer)
+    public void addplayer(String newplayer,String newplayer2,int a)
     {
     
-        playerList.add(newplayer);
+        getTeams().get(a).setPlayer1(newplayer,0);
+        getTeams().get(a).setPlayer2(newplayer2,0);
     
     }
    
@@ -40,9 +41,10 @@ public class Database
         getTeams().get(a).setGoal(getTeams().get(a).getGoal()+goal);
     }
     
-    public void addgoal (int goal, int a)
+    public void addgoal (int goal, int goal2,int a)
     {
-        getPlayers().get(a).setGoals(goal);
+        getTeams().get(a).getPlayer().get(0).setGoals(goal);
+        getTeams().get(a).getPlayer().get(1).setGoals(goal2);
     }
     
     public void addpoint(int point ,int a)

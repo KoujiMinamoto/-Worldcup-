@@ -1,6 +1,8 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Game
 {
@@ -50,14 +52,15 @@ public class Game
            switch(option)
            {
                 case 'A': Preliminary();
-                        break;
-                case 'B': 
-                        break;
+                          totalpoint();
+                          break;
+                case 'B': sort();
+                          break;
                 case 'C': 
                         break;
                 case 'D': 
                          break;
-                case 'E': 
+                case 'E': display();
                          break;                         
                 case 'X': //writeFile();
                         exit = true;
@@ -151,6 +154,7 @@ public class Game
     {
         Player setname;
         Player set2name;
+        Team ranklist = new Team();
         set2name = new Player();
         setname = new Player();
         Scanner input = new Scanner(System.in);
@@ -203,10 +207,122 @@ public class Game
         newteamList.addplayer(set2name);
     }
     
+    public void totalpoint()
+    {   
+        int totalpoint = 0;
+        int a = 0 ;
+        ArrayList<Team> resultList = newteamList.getTeams();
+        while(a<=3)
+        {
+            totalpoint = (resultList.get(a).getWon()*3+resultList.get(a).getDrawn());
+            newteamList.addpoint(totalpoint,a);
+            a++;
+        }
+    
+    }
+    
+    public void sort() 
+    {
+        ArrayList<Team> sortlist = newteamList.getTeams();
+        Team sort;
+        for(int a=0;a<=3;a++)
+        {
+            for(int b=a+1;b<=3;b++)
+            {
+                if(sortlist.get(b-1).getPoint() > sortlist.get(b).getPoint())
+                {
+                    sort = sortlist.get(b-1);
+                    newteamList.getTeams().set((b-1),sortlist.get(b));
+                    newteamList.getTeams().set(b,sort);
+                
+                }
+                
+                if(sortlist.get(b-1).getPoint() == sortlist.get(b).getPoint())
+                {
+                    if(sortlist.get(b-1).getGoal() > sortlist.get(b).getGoal())
+                    {
+                        sort =  sort = sortlist.get(b-1);
+                        newteamList.getTeams().set((b-1),sortlist.get(b));
+                        newteamList.getTeams().set(b,sort);
+                    }
+                    
+                    if(sortlist.get(b-1).getGoal() == sortlist.get(b).getGoal())
+                    {
+                        int random = Random.GenerateRandomNumber(1);
+                        if(random == 1)
+                        {
+                            sort =  sort = sortlist.get(b-1);
+                            newteamList.getTeams().set((b-1),sortlist.get(b));
+                            newteamList.getTeams().set(b,sort);
+                        
+                        
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+        
+      
+        
+    }
+
     public void Final()
     {
-    
-    
+        int a =3;
+        int b =2;
+        int goalfora = 0;
+        int goalforb = 0;
+        int reda = 0;
+        int yellowa = 0;
+        int redb = 0;
+        int yellowb = 0;
+        int goala = 0;
+        int goalb = 0;
+        ArrayList<Team> resultList = newteamList.getTeams();
+        if(resultList.get(a).getRank() > resultList.get(b).getRank())
+        {
+            goala = Random.GenerateRandomNumber(5-resultList.get(a).getRank()+resultList.get(b).getRank()+Random.GenerateRandomNumber(2));
+            goalb = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
+            
+        }
+        else if(resultList.get(a).getRank() < resultList.get(b).getRank())
+        {
+            goalb = Random.GenerateRandomNumber(5-resultList.get(b).getRank()+resultList.get(a).getRank()+Random.GenerateRandomNumber(2));
+            goala = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
+        
+        }
+        else
+        {
+        
+        }
+        
+        reda = Random.GenerateRandomNumber(1);
+        yellowa = Random.GenerateRandomNumber(4);
+        redb = Random.GenerateRandomNumber(1);
+        yellowb = Random.GenerateRandomNumber(4);
+        displayGameResult(resultList.get(a).getName(),resultList.get(b).getName(),goala,goalb,reda,redb,yellowa,yellowb);
+        if(goala>goalb)
+        {
+            newteamList.addwin(1,0,0,yellowa,reda,goala,a);
+            newteamList.addwin(0,0,1,yellowb,redb,goalb,b);
+        }
+        else if(goalb>goala)
+        {
+            newteamList.addwin(0,0,1,yellowa,reda,goala,a);
+            newteamList.addwin(1,0,0,yellowb,redb,goalb,b);
+        }
+        else
+        {
+            playPenaltyShootOut();
+        }
+        goalfora = Random.GenerateRandomNumber(goala);
+        goalforb = Random.GenerateRandomNumber(goalb);
+        newteamList.addgoal(goalfora,2*a);
+        newteamList.addgoal(goala-goalfora,2*a+1);
+        newteamList.addgoal(goalforb,2*b);
+        newteamList.addgoal(goalb-goalforb,2*b+1);
     
     
     
@@ -287,6 +403,23 @@ public class Game
         }
     }
     
+    public void display()
+    {
+        for(int a=3;a>=0;a--)
+        {
+            ArrayList<Team> resultList = newteamList.getTeams();
+            String name =resultList.get(a).getName();
+            int played = resultList.get(a).getWon()+resultList.get(a).getDrawn()+resultList.get(a).getLost();
+            int fair = resultList.get(a).getRed()*2+resultList.get(a).getYellow();
+            System.out.println("          played   won   lost   drawn   goals  points  fairplay");
+            System.out.println(name+played+"  "+resultList.get(a).getWon()+"  "+resultList.get(a).getDrawn()+"  "+resultList.get(a).getLost()+"  "+resultList.get(a).getGoal()+"  "+resultList.get(a).getPoint()+"  "+fair);
+            
+        
+        
+        }
+    
+    
+    }
 
     private int convertStringtoInt(String input) //method to convert String to Integer
     {
@@ -342,4 +475,5 @@ public class Game
         
        return false;
     }
+    
 }

@@ -17,7 +17,6 @@ public class Database
     
         playerList.add(newplayer);
     
-    
     }
    
     public boolean addteam (Team newteam)
@@ -46,12 +45,20 @@ public class Database
         getPlayers().get(a).setGoals(goal);
     }
     
+    public void addpoint(int point ,int a)
+    {
+         getTeams().get(a).setPoint(point);
+    
+    }
+    
    public int getnumberofplayers()
     {
        
        return playerList.size();
     
     }
+   
+
     
     public ArrayList<Team> getTeams()
    {

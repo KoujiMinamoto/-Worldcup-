@@ -3,7 +3,9 @@ import java.util.*;
 public class Team
 {
    private String name ;
-   private int rank, redcards, yellowcards,won,lost,drawn, goals;
+   private int rank, redcards, yellowcards,won,lost,drawn, goals,point;
+   Player player1;
+   Player player2;
    
    
    
@@ -92,5 +94,16 @@ public class Team
        return goals;
    }
    
-  
+   public void setPoint(int TeamPoint)
+   {
+       point = TeamPoint;
+   }
+   
+   public int getPoint()
+   {
+       return point;
+   }
+   
+   
+   
 }

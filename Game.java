@@ -11,13 +11,18 @@ public class Game
     Player player = new Player();
     Menu menu = new Menu();
     RandomGoalsGenerator Random = new RandomGoalsGenerator();
+    String winner;
+    String goldenboot;
+    String FairPlayAward;
     
     
     public Game()
     {
     
         newteamList = new Database();
-    
+        winner = "";
+        goldenboot = "";
+        FairPlayAward = "";
     }
 
     public void  playGame()
@@ -53,14 +58,17 @@ public class Game
            {
                 case 'A': Preliminary();
                           totalpoint();
+                          sort();
                           break;
-                case 'B': sort();
+                case 'B': Final();
+                          totalpoint();
+                          sort();
                           break;
-                case 'C': 
-                        break;
-                case 'D': 
+                case 'C': display();
                          break;
-                case 'E': display();
+                case 'D': sortPlayer();
+                         break;
+                case 'E': 
                          break;                         
                 case 'X': //writeFile();
                         exit = true;
@@ -76,6 +84,15 @@ public class Game
       
       
          }
+    
+    
+    }
+    
+    public void Displayfinal()
+    {
+        System.out.println("Football World Cup Winner: "+winner);
+        System.out.println("Golden Boot Award: "+goldenboot);
+        System.out.println("Fair Play Award: "+FairPlayAward);
     
     
     }
@@ -154,15 +171,15 @@ public class Game
         System.out.println("=== Add Player ===");
         System.out.println("Please insert 1st playername:"); 
         String newname = input.nextLine();
-        if(validplayername(newname)==true)
+        if(validplayername(newname)==false)
         {
             System.out.println("=== Add Player ===");
             System.out.println("Please insert 1st playername again:"); 
             String newname1 = input.nextLine();
-            if(validplayername(newname1)==true)
+            if(validplayername(newname1)==false)
             {
                 System.out.println("use default name:");
-                newname = "";
+                newname = newteamList.getTeams().get(numberofteam).getName()+"-1-player";
                 
             }
             else
@@ -179,15 +196,15 @@ public class Game
         System.out.println("=== Add Player ===");
         System.out.println("Please insert 2st playername:"); 
         String new2name = input.nextLine();
-        if(validplayername(new2name)==true)
+        if(new2name==newname||validplayername(new2name)==false)
         {
             System.out.println("=== Add Player ===");
             System.out.println("Please insert 2st playername again:"); 
             String newname2 = input.nextLine();
-            if(validplayername(newname2)==true)
+            if(new2name==newname||validplayername(newname2)==false)
             {
                 System.out.println("use default name:");
-                new2name = "";
+                new2name = newteamList.getTeams().get(numberofteam).getName()+"-2-player";
                 
             }
             else
@@ -222,9 +239,9 @@ public class Game
     {
         ArrayList<Team> sortlist = newteamList.getTeams();
         Team sort;
-        for(int a=0;a<=3;a++)
+        for(int a=0;a<3;a++)
         {
-            for(int b=a+1;b<=3;b++)
+            for(int b=1;b<4-a;b++)
             {
                 if(sortlist.get(b-1).getPoint() > sortlist.get(b).getPoint())
                 {
@@ -259,12 +276,81 @@ public class Game
                 }
             }
         }
-        
-        
-      
-        
-    }
 
+    }
+    
+    public void sortFair() 
+    {
+        
+        ArrayList<Team> sortlist = newteamList.getTeams();
+        Team sort;
+        for(int a=0;a<3;a++)
+        {
+            for(int b=1;b<4-a;b++)
+            {
+                if(sortlist.get(b-1).getPoint() > sortlist.get(b).getPoint())
+                {
+                    sort = sortlist.get(b-1);
+                    newteamList.getTeams().set((b-1),sortlist.get(b));
+                    newteamList.getTeams().set(b,sort);
+                
+                }
+                 
+                
+            }
+        }
+
+    }
+    public void sortPlayer()
+    {
+        ArrayList<Player> sortplayerList;
+        sortplayerList = new ArrayList<Player>() ;
+        Player sortplayer;
+        for(int a=0;a<4;a++)
+        {
+             sortplayer = new Player();
+             sortplayer.setName(newteamList.getTeams().get(a).getPlayer1name()+" ("+newteamList.getTeams().get(a).getName()+")");
+             sortplayer.setGoals(newteamList.getTeams().get(a).getPlayer1());
+             sortplayerList.add(sortplayer);
+        
+             sortplayer = new Player();
+             sortplayer.setName(newteamList.getTeams().get(a).getPlayer2name()+" ("+newteamList.getTeams().get(a).getName()+")");
+             sortplayer.setGoals(newteamList.getTeams().get(a).getPlayer2());
+             sortplayerList.add(sortplayer);
+        }
+        Player sort;
+        ArrayList<Player> sortlist = sortplayerList ;
+        for(int a=0;a<7;a++)
+        {
+            for(int b=1;b<8-a;b++)
+            {
+                if(sortlist.get(b-1).getGoals() > sortlist.get(b).getGoals())
+                {
+                   sort = sortlist.get(b-1);
+                   sortplayerList.set((b-1),sortlist.get(b));
+                   sortplayerList.set(b,sort);
+                
+                }
+            }
+        }
+        
+        if(sortplayerList.get(7).getGoals() == sortplayerList.get(6).getGoals() )
+        {
+            if(sortplayerList.get(6).getGoals() == sortplayerList.get(5).getGoals())
+            {
+                goldenboot = sortplayerList.get(7).getName()+" and "+ sortplayerList.get(6).getName()+" and "+ sortplayerList.get(5).getName();
+            }
+            else
+            goldenboot = sortplayerList.get(7).getName()+" and "+ sortplayerList.get(6).getName();
+        }
+        goldenboot = sortplayerList.get(7).getName();
+        
+        for(int i=7;i>=0;i--)
+        {
+            System.out.println(sortplayerList.get(i).getName() + " - " +sortplayerList.get(i).getGoals() );
+        }
+    }
+    
     public void Final()
     {
         int a =3;
@@ -304,15 +390,19 @@ public class Game
         {
             newteamList.addwin(1,0,0,yellowa,reda,goala,a);
             newteamList.addwin(0,0,1,yellowb,redb,goalb,b);
+            winner = resultList.get(a).getName();
         }
         else if(goalb>goala)
         {
             newteamList.addwin(0,0,1,yellowa,reda,goala,a);
             newteamList.addwin(1,0,0,yellowb,redb,goalb,b);
+            winner = resultList.get(b).getName();
         }
         else
-        {
-            playPenaltyShootOut();
+        {   
+            newteamList.addwin(0,0,0,yellowa,reda,goala,a);
+            newteamList.addwin(0,0,0,yellowb,redb,goalb,b);
+            playPenaltyShootOut(a,b);
         }
         goalfora = Random.GenerateRandomNumber(goala);
         goalforb = Random.GenerateRandomNumber(goalb);
@@ -353,8 +443,48 @@ public class Game
     
     }
     
-    public void  playPenaltyShootOut()
+    public void  playPenaltyShootOut(int a ,int b)
     {
+        int a1,a2,b1,b2 = 0;
+        a1 =Random.GenerateRandomNumber(5);
+        a2 =Random.GenerateRandomNumber(5);
+        b2 =Random.GenerateRandomNumber(5);
+        b1 =Random.GenerateRandomNumber(5);
+        if((a1+a2)>(b1+b2))
+        {
+            winner = newteamList.getTeams().get(a).getName();
+            newteamList.addwin(1,0,0,0,0,0,a);
+            newteamList.addwin(0,0,1,0,0,0,b);
+        }
+        else if((a1+a2)<(b1+b2))
+        {
+            winner = newteamList.getTeams().get(b).getName();
+            newteamList.addwin(0,0,1,0,0,0,a);
+            newteamList.addwin(1,0,0,0,0,0,b);
+        }
+        else
+        {
+            while((a1+a2)==(b1+b2))
+            {
+                a1 =Random.GenerateRandomNumber(1);
+                a2 =Random.GenerateRandomNumber(1);
+                b2 =Random.GenerateRandomNumber(1);
+                b1 =Random.GenerateRandomNumber(1);
+            }
+            if((a1+a2)>(b1+b2))
+            {
+                winner = newteamList.getTeams().get(a).getName();
+                newteamList.addwin(1,0,0,0,0,0,a);
+                newteamList.addwin(0,0,1,0,0,0,b);
+            }
+            else if((a1+a2)<(b1+b2))
+            {
+                winner = newteamList.getTeams().get(b).getName();
+                newteamList.addwin(0,0,1,0,0,0,a);
+                newteamList.addwin(1,0,0,0,0,0,b);
+            }
+        
+        }
     
     
     
@@ -407,8 +537,8 @@ public class Game
             String name =resultList.get(a).getName();
             int played = resultList.get(a).getWon()+resultList.get(a).getDrawn()+resultList.get(a).getLost();
             int fair = resultList.get(a).getRed()*2+resultList.get(a).getYellow();
-            System.out.println("          played   won   lost   drawn   goals  points  fairplay");
-            System.out.println(name+played+"  "+resultList.get(a).getWon()+"  "+resultList.get(a).getDrawn()+"  "+resultList.get(a).getLost()+"  "+resultList.get(a).getGoal()+"  "+resultList.get(a).getPoint()+"  "+fair);
+            System.out.println("Name         played  won  lost  drawn  goals  points  fairplay");
+            System.out.println(name+"   "+played+"    "+resultList.get(a).getWon()+"    "+resultList.get(a).getDrawn()+"    "+resultList.get(a).getLost()+"    "+resultList.get(a).getGoal()+"    "+resultList.get(a).getPoint()+"    "+fair);
             
         
         
@@ -459,17 +589,60 @@ public class Game
         return true;
     }
     
-    public boolean validplayername(String playername)
+    private boolean validplayername(String iobuffer) //method to check insert any empties or blanks
     {
-       //check if car is not in database , and return false to break while loop
-       boolean isrepeated = newteamList.validname(playername);
-       if (isrepeated)
-       {
-        System.out.println("Error : player name existed , please insert another name!");
-        return isrepeated;
-       }
-        
-       return false;
+        if (iobuffer.matches("[a-zA-z\\-]*"))
+        {
+           
+            if (iobuffer.trim().isEmpty() || iobuffer.length() < 2)
+            {
+                System.out.println("Error : please insert more than 2!");
+                return false;
+            }
+            int position = 0;
+            char hyphen = '-';
+            int count = 0;
+            for (position = 0; position < iobuffer.length(); position++)
+            {
+            if (iobuffer.charAt(position) == hyphen)
+            {
+                count++;
+                if (count > 1)
+                    return false;
+            }
+            if (iobuffer.charAt(0) == hyphen || iobuffer.charAt(iobuffer.length() - 1) == hyphen)
+            {
+                return false;
+            }           
+            }
+            return true;
+
+         }
+         else
+         {
+             System.out.println("Error: opition shouldn't be #!123...Please enter again:");
+             return false;
+         }
     }
     
+    public boolean isHyphen(String newPlayerName)
+    {
+        int position = 0;
+        char hyphen = '-';
+        int count = 0;
+        for (position = 0; position < newPlayerName.length(); position++)
+        {
+            if (newPlayerName.charAt(position) == hyphen)
+            {
+                count++;
+                if (count > 1)
+                    return false;
+            }
+            if (newPlayerName.charAt(0) == hyphen || newPlayerName.charAt(newPlayerName.length() - 1) == hyphen)
+            {
+                return false;
+            }           
+        }
+        return true;
+    }
 }

@@ -4,11 +4,15 @@ public class Team
 {
    private String name ;
    private int rank, redcards, yellowcards,won,lost,drawn, goals,point;
-   Player player1;
-   Player player2;
-   private ArrayList<Player> playerList;
+   Player player1 = new Player();
+   Player player2 = new Player();;
    
    
+   public Team()
+   {
+      
+   }
+  
    
    public void displayTeamrecord()
    {
@@ -117,10 +121,43 @@ public class Team
        player2.setGoals(player2.getGoals()+goals);
    }
    
-   public ArrayList<Player> getPlayer()
+   public void setPlayer1goal(int goals)
    {
-       return playerList;
+       player1.setGoals(player1.getGoals()+goals);
    }
    
+   public void setPlayer2goal(int goals)
+   {
+       player2.setGoals(player2.getGoals()+goals);
+   }
    
+   public int getPlayer1()
+   {
+       return player1.getGoals();
+   }
+   
+   public int getPlayer2()
+   {
+       return player2.getGoals();
+   }
+   
+   public String getPlayer1name()
+   {
+       return player1.getName();
+   }
+   
+   public String getPlayer2name()
+   {
+       return player2.getName();
+   }
+   
+   public void setFair(int fair)
+   {
+       
+   }
+   
+   public int getFair()
+   {
+       return player1.getGoals();
+   }
 }

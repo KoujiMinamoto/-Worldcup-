@@ -4,12 +4,10 @@ import java.io.*;
 public class Database
 {
     private ArrayList<Team> teamList;
-    private ArrayList<Player> playerList;
     
     public Database()
     {
         teamList = new ArrayList<Team>();
-        playerList = new ArrayList<Player>();
     }
     
     public void addplayer(String newplayer,String newplayer2,int a)
@@ -43,9 +41,10 @@ public class Database
     
     public void addgoal (int goal, int goal2,int a)
     {
-        getTeams().get(a).getPlayer().get(0).setGoals(goal);
-        getTeams().get(a).getPlayer().get(1).setGoals(goal2);
+        getTeams().get(a).setPlayer1goal(goal);
+        getTeams().get(a).setPlayer2goal(goal2);
     }
+    
     
     public void addpoint(int point ,int a)
     {
@@ -53,12 +52,7 @@ public class Database
     
     }
     
-   public int getnumberofplayers()
-    {
-       
-       return playerList.size();
-    
-    }
+
    
 
     
@@ -67,20 +61,7 @@ public class Database
        return teamList;
    }
    
-   public ArrayList<Player> getPlayers()
-   {
-       return playerList;
-   }
+
     
-   public boolean validname(String name)
-   {
-       //check if name is not in database , and return false to break while loop
-       for (int i =0; i < getnumberofplayers(); i++)
-       {
-        if (name.equals(getPlayers().get(i).getName()))
-        return true;
-        }
-        
-        return false;
-   }
+
 }

@@ -68,7 +68,7 @@ public class Game
                          break;
                 case 'D': sortPlayer();
                          break;
-                case 'E': 
+                case 'E': Displayfinal();
                          break;                         
                 case 'X': //writeFile();
                         exit = true;
@@ -281,26 +281,42 @@ public class Game
     
     public void sortFair() 
     {
-        
+        for(int a=0;a<4;a++)
+        {
+            newteamList.addfair(a);
+        }
         ArrayList<Team> sortlist = newteamList.getTeams();
+        ArrayList<Team> sortfairlist = sortlist;
         Team sort;
         for(int a=0;a<3;a++)
         {
             for(int b=1;b<4-a;b++)
             {
-                if(sortlist.get(b-1).getPoint() > sortlist.get(b).getPoint())
+                if(sortlist.get(b-1).getFair() > sortlist.get(b).getFair())
                 {
                     sort = sortlist.get(b-1);
-                    newteamList.getTeams().set((b-1),sortlist.get(b));
-                    newteamList.getTeams().set(b,sort);
+                    sortfairlist.set((b-1),sortlist.get(b));
+                    sortfairlist.set(b,sort);
                 
                 }
                  
                 
             }
         }
+         if(sortfairlist.get(0).getFair() == sortfairlist.get(1).getFair() )
+        {
+            if(sortfairlist.get(1).getFair() == sortfairlist.get(2).getFair())
+            {
+                FairPlayAward = sortfairlist.get(0).getName()+" and "+ sortfairlist.get(1).getName()+" and "+ sortfairlist.get(2).getName();
+            }
+            else
+            FairPlayAward = sortfairlist.get(0).getName()+" and "+ sortfairlist.get(1).getName();
+        }
+        else
+        FairPlayAward = sortfairlist.get(0).getName();
 
     }
+    
     public void sortPlayer()
     {
         ArrayList<Player> sortplayerList;
@@ -343,6 +359,7 @@ public class Game
             else
             goldenboot = sortplayerList.get(7).getName()+" and "+ sortplayerList.get(6).getName();
         }
+        else
         goldenboot = sortplayerList.get(7).getName();
         
         for(int i=7;i>=0;i--)

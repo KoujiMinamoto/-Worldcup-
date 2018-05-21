@@ -3,7 +3,7 @@ import java.util.*;
 public class Team
 {
    private String name ;
-   private int rank, redcards, yellowcards,won,lost,drawn, goals,point;
+   private int rank, redcards, yellowcards,won,lost,drawn, goals,point,Fair;
    Player player1 = new Player();
    Player player2 = new Player();;
    
@@ -153,11 +153,11 @@ public class Team
    
    public void setFair(int fair)
    {
-       
+       Fair = fair;
    }
    
    public int getFair()
    {
-       return player1.getGoals();
+       return Fair;
    }
 }

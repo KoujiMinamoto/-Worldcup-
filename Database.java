@@ -29,6 +29,12 @@ public class Database
        
     }
     
+    public void addfair(int a)
+    {
+        getTeams().get(a).setFair(getTeams().get(a).getYellow()+getTeams().get(a).getRed()*2);
+    
+    }
+    
     public void addwin (int win,int drawn, int lose, int y , int r ,int goal ,int a)
     {
         getTeams().get(a).setWon(getTeams().get(a).getWon()+win);

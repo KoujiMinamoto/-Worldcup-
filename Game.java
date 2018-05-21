@@ -1,8 +1,7 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-import java.util.Collections;
-import java.util.Comparator;
+
 
 public class Game
 {
@@ -30,6 +29,7 @@ public class Game
         Team team = new Team();
         readFile();
         boolean exit = false;
+        boolean A = false;
         int i = 0;
         while(i < 4)
         {
@@ -59,21 +59,30 @@ public class Game
                 case 'A': Preliminary();
                           totalpoint();
                           sort();
+                          A = true;
                           break;
-                case 'B': Final();
-                          totalpoint();
-                          sort();
+                case 'B': if(A == true)
+                          {
+                              Final();
+                              totalpoint();
+                              sort();
+                              sortFair();
+                          }
+                          else
+                          {
+                              System.out.println("Please play Preliminary Stage first "); 
+                          }
                           break;
                 case 'C': display();
-                         break;
+                          break;
                 case 'D': sortPlayer();
-                         break;
+                          break;
                 case 'E': Displayfinal();
-                         break;                         
-                case 'X': //writeFile();
-                        exit = true;
-                        System.out.println("Goodbye. ");
-                        break;
+                          break;                         
+                case 'X': writeFile();
+                          exit = true;
+                          System.out.println("Goodbye. ");
+                          break;
         
                
             }
@@ -188,20 +197,17 @@ public class Game
             }
         
         }
-        else
-        {
-        newname = input.nextLine(); 
-        }
+
         
         System.out.println("=== Add Player ===");
         System.out.println("Please insert 2st playername:"); 
         String new2name = input.nextLine();
-        if(new2name==newname||validplayername(new2name)==false)
+        if(new2name.equals(newname)||validplayername(new2name)==false)
         {
             System.out.println("=== Add Player ===");
             System.out.println("Please insert 2st playername again:"); 
             String newname2 = input.nextLine();
-            if(new2name==newname||validplayername(newname2)==false)
+            if(new2name.equals(newname)||validplayername(newname2)==false)
             {
                 System.out.println("use default name:");
                 new2name = newteamList.getTeams().get(numberofteam).getName()+"-2-player";
@@ -214,10 +220,7 @@ public class Game
             
         
         }
-        else
-        {
-        new2name = input.nextLine(); 
-        }
+
         newteamList.addplayer(newname,new2name,numberofteam);
     }
     
@@ -303,6 +306,7 @@ public class Game
                 
             }
         }
+        
          if(sortfairlist.get(0).getFair() == sortfairlist.get(1).getFair() )
         {
             if(sortfairlist.get(1).getFair() == sortfairlist.get(2).getFair())
@@ -661,5 +665,23 @@ public class Game
             }           
         }
         return true;
+    }
+    
+    private void writeFile()
+    {
+         String filename = ("statistics.txt");
+        //try catch to handle IOException
+        try
+        {
+            PrintWriter outputFile = new PrintWriter (filename);
+            outputFile.println("Football World Cup Winner: "+winner);
+            outputFile.println("Golden Boot Award: "+goldenboot);
+            outputFile.println("Fair Play Award: "+FairPlayAward);
+            outputFile.close();    
+        }
+        catch(IOException exception)
+        {
+            System.out.println("Unexpected I/O error occured");
+        }
     }
 }

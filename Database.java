@@ -4,7 +4,6 @@ import java.io.*;
 public class Database
 {
     private ArrayList<Team> teamList;
-    private ArrayList<Team> oldteamList;
     
     public Database()
     {
@@ -58,13 +57,7 @@ public class Database
          getTeams().get(a).setPoint(point);
     
     }
-    
-    public ArrayList<Team> getoTeams()
-   {
-       return oldteamList;
-   }
-   
-    
+
     
     public ArrayList<Team> getTeams()
    {

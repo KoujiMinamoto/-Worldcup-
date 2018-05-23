@@ -4,6 +4,7 @@ import java.io.*;
 public class Database
 {
     private ArrayList<Team> teamList;
+    private ArrayList<Team> oldteamList;
     
     public Database()
     {
@@ -58,9 +59,12 @@ public class Database
     
     }
     
-
+    public ArrayList<Team> getoTeams()
+   {
+       return oldteamList;
+   }
    
-
+    
     
     public ArrayList<Team> getTeams()
    {

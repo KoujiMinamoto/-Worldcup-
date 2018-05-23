@@ -5,9 +5,7 @@ import java.io.*;
 
 public class Game
 {
-    Team team = new Team();
     private Database newteamList;
-    Player player = new Player();
     Menu menu = new Menu();
     RandomGoalsGenerator Random = new RandomGoalsGenerator();
     String winner;
@@ -466,18 +464,17 @@ public class Game
     
     public void  playPenaltyShootOut(int a ,int b)
     {
-        int a1,a2,b1,b2 = 0;
+        int a1,b1= 0;
         a1 =Random.GenerateRandomNumber(5);
-        a2 =Random.GenerateRandomNumber(5);
-        b2 =Random.GenerateRandomNumber(5);
         b1 =Random.GenerateRandomNumber(5);
-        if((a1+a2)>(b1+b2))
+        
+        if(a1>b1)
         {
             winner = newteamList.getTeams().get(a).getName();
             newteamList.addwin(1,0,0,0,0,0,a);
             newteamList.addwin(0,0,1,0,0,0,b);
         }
-        else if((a1+a2)<(b1+b2))
+        else if(a1<b1)
         {
             winner = newteamList.getTeams().get(b).getName();
             newteamList.addwin(0,0,1,0,0,0,a);
@@ -485,20 +482,18 @@ public class Game
         }
         else
         {
-            while((a1+a2)==(b1+b2))
+            while(a1==b1)
             {
                 a1 =Random.GenerateRandomNumber(1);
-                a2 =Random.GenerateRandomNumber(1);
-                b2 =Random.GenerateRandomNumber(1);
                 b1 =Random.GenerateRandomNumber(1);
             }
-            if((a1+a2)>(b1+b2))
+            if(a1>b1)
             {
                 winner = newteamList.getTeams().get(a).getName();
                 newteamList.addwin(1,0,0,0,0,0,a);
                 newteamList.addwin(0,0,1,0,0,0,b);
             }
-            else if((a1+a2)<(b1+b2))
+            else if(a1<b1)
             {
                 winner = newteamList.getTeams().get(b).getName();
                 newteamList.addwin(0,0,1,0,0,0,a);
@@ -507,7 +502,7 @@ public class Game
         
         }
     
-    
+        System.out.println("winner is :"+ winner );
     
     }
     

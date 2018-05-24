@@ -2,7 +2,6 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-
 public class Game
 {
     private Database newteamList;
@@ -11,15 +10,18 @@ public class Game
     String winner;
     String goldenboot;
     String FairPlayAward;
-    
+    String team;
+    String player;
+    boolean A = false; //to make sure if it play A first
     
     public Game()
     {
-    
         newteamList = new Database();
         winner = "";
         goldenboot = "";
         FairPlayAward = "";
+        team = "";
+        player = "";
     }
 
     public void  playGame()
@@ -27,7 +29,6 @@ public class Game
         Team team = new Team();
         readFile();
         boolean exit = false;
-        boolean A = false;
         int i = 0;
         while(i < 4)
         {
@@ -47,52 +48,46 @@ public class Game
             String iobuffer = input.nextLine(); 
             System.out.println("");
             
-         if (validBlank(iobuffer))
-         { 
-           String iobuffer1 = iobuffer.toUpperCase();
-           char option = iobuffer1.charAt(0);
+            if (validBlank(iobuffer))
+            { 
+                String iobuffer1 = iobuffer.toUpperCase();
+                char option = iobuffer1.charAt(0);
 
-           switch(option)
-           {
-                case 'A': Preliminary();
-                          totalpoint();
-                          sort();
-                          A = true;
-                          break;
-                case 'B': if(A == true)
-                          {
+                switch(option)
+                {
+                    case 'A': Preliminary();
+                            totalpoint();
+                            sort();
+                            display();
+                            sortPlayer();
+                            A = true;
+                            break;
+                    case 'B': if(A == true)
+                            { 
                               Final();
                               totalpoint();
                               sort();
                               sortFair();
-                          }
-                          else
-                          {
+                              sortPlayer();
+                            }
+                            else
+                            {
                               System.out.println("Please play Preliminary Stage first "); 
-                          }
-                          break;
-                case 'C': display();
-                          break;
-                case 'D': sortPlayer();
-                          break;
-                case 'E': Displayfinal();
-                          break;                         
-                case 'X': writeFile();
-                          exit = true;
-                          System.out.println("Goodbye. ");
-                          break;
-        
-               
+                            }
+                            break;
+                    case 'C': displayC();
+                             break;
+                    case 'D': displayD();
+                             break;
+                    case 'E': Displayfinal();
+                             break;                         
+                    case 'X': writeFile();
+                            exit = true;
+                            System.out.println("Goodbye. ");
+                            break; 
             }
-            
-
-      
           }
-      
-      
          }
-    
-    
     }
     
     public void Displayfinal()
@@ -100,8 +95,6 @@ public class Game
         System.out.println("Football World Cup Winner: "+winner);
         System.out.println("Golden Boot Award: "+goldenboot);
         System.out.println("Fair Play Award: "+FairPlayAward);
-    
-    
     }
     
     public void Preliminary()
@@ -114,8 +107,7 @@ public class Game
         {
         b= a+1;
         while(b<=3)
-        {
-            
+        {   
         int reda = 0;
         int yellowa = 0;
          int redb = 0;
@@ -363,10 +355,12 @@ public class Game
         }
         else
         goldenboot = sortplayerList.get(7).getName();
-        
-        for(int i=7;i>=0;i--)
+        if(A==false)
         {
-            System.out.println(sortplayerList.get(i).getName() + " - " +sortplayerList.get(i).getGoals() );
+          for(int i=7;i>=0;i--)
+          {
+            player=(player+"\n"+sortplayerList.get(i).getName() + " - " +sortplayerList.get(i).getGoals()+"\n" );
+          }
         }
     }
     
@@ -501,9 +495,7 @@ public class Game
             }
         
         }
-    
         System.out.println("winner is :"+ winner );
-    
     }
     
      private void readFile()
@@ -546,34 +538,41 @@ public class Game
     }
     
     public void display()
-    {
+    {   
+        System.out.println("Name    played  won  lost  drawn  goals  points  fairplay");
         for(int a=3;a>=0;a--)
         {
             ArrayList<Team> resultList = newteamList.getTeams();
             String name =resultList.get(a).getName();
             int played = resultList.get(a).getWon()+resultList.get(a).getDrawn()+resultList.get(a).getLost();
             int fair = resultList.get(a).getRed()*2+resultList.get(a).getYellow();
-            System.out.println("Name         played  won  lost  drawn  goals  points  fairplay");
-            System.out.println(name+"   "+played+"    "+resultList.get(a).getWon()+"    "+resultList.get(a).getDrawn()+"    "+resultList.get(a).getLost()+"    "+resultList.get(a).getGoal()+"    "+resultList.get(a).getPoint()+"    "+fair);
-            
-        
-        
-        }
-    
-    
-    }
 
+            System.out.println("\n"+name+"   "+played+"    "+resultList.get(a).getWon()+"    "+resultList.get(a).getDrawn()+"    "+resultList.get(a).getLost()+"    "+resultList.get(a).getGoal()+"    "+resultList.get(a).getPoint()+"    "+fair);
+            team=(team + "\n"+ name+"   "+played+"    "+resultList.get(a).getWon()+"    "+resultList.get(a).getDrawn()+"    "+resultList.get(a).getLost()+"    "+resultList.get(a).getGoal()+"    "+resultList.get(a).getPoint()+"    "+fair+"\n");
+        }
+    }
+    
+    public void displayC()
+    {
+        System.out.println("Name         played  won  lost  drawn  goals  points  fairplay");
+        System.out.println(team);
+    }
+    
+    public void displayD()
+    { 
+        System.out.println(player);
+    }
+    
     private int convertStringtoInt(String input) //method to convert String to Integer
     {
         //intialised variables
         String S = input;
-        int i = 0;
+        int number = 0;
         //try catch to handle NumberFormatException
         try
         {
             // the String to int conversion happens here
-            i = Integer.parseInt(input.trim());
-
+            number = Integer.parseInt(input.trim());
             // print out the value after the conversion
             //System.out.println("int i = " + i);
         }
@@ -581,25 +580,19 @@ public class Game
         {
             System.out.println("NumberFormatException: " + nfe.getMessage() + ", please input an integer!");
         }
-        return i;
+        return number;
     }
     
     private boolean validBlank(String iobuffer) //method to check insert any empties or blanks
     {
         if (iobuffer.matches("[abcdexABCDEX]*"))
-        {
-           
+        {        
             if (iobuffer.trim().isEmpty() || iobuffer.length() > 1)
             {
                 System.out.println("Error : please insert from A to E OR Z !");
                 return false;
             }
-            
-          
             return true;
-            
-        
-            
          }
         System.out.println("Error: opition shouldn't be #!123...Please enter again:");
         return true;
@@ -641,7 +634,7 @@ public class Game
          }
     }
     
-    public boolean isHyphen(String newPlayerName)
+    /*public boolean isHyphen(String newPlayerName)
     {
         int position = 0;
         char hyphen = '-';
@@ -660,7 +653,7 @@ public class Game
             }           
         }
         return true;
-    }
+    }*/
     
     private void writeFile()
     {

@@ -5,12 +5,21 @@ public class Team
    private String name ;
    private int rank, redcards, yellowcards,won,lost,drawn, goals,point,Fair;
    Player player1 = new Player();
-   Player player2 = new Player();;
+   Player player2 = new Player();
    
    
    public Team()
    {
-      
+      name = "";
+      rank = 0;
+      redcards = 0;
+      yellowcards = 0;
+      won = 0;
+      lost = 0;
+      drawn = 0;
+      goals = 0;
+      point = 0;
+      Fair = 0;
    }
   
    

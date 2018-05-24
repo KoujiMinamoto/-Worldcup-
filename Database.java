@@ -55,14 +55,13 @@ public class Database
     public void addpoint(int point ,int a)
     {
          getTeams().get(a).setPoint(point);
-    
     }
 
     
     public ArrayList<Team> getTeams()
-   {
+    {
        return teamList;
-   }
+    }
    
 
     

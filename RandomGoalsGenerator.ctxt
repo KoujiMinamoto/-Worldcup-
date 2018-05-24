@@ -1,5 +1,7 @@
 #BlueJ class context
 comment0.target=RandomGoalsGenerator
-comment1.params=i
-comment1.target=int\ GenerateRandomNumber(int)
-numComments=2
+comment1.params=
+comment1.target=RandomGoalsGenerator()
+comment2.params=i
+comment2.target=int\ GenerateRandomNumber(int)
+numComments=3

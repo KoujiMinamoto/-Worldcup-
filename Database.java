@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-
 public class Database
 {
     private ArrayList<Team> teamList;
@@ -11,28 +10,24 @@ public class Database
     }
     
     public void addplayer(String newplayer,String newplayer2,int a)
-    {
-    
+    {    
         getTeams().get(a).setPlayer1(newplayer,0);
-        getTeams().get(a).setPlayer2(newplayer2,0);
-    
+        getTeams().get(a).setPlayer2(newplayer2,0);    
     }
    
     public boolean addteam (Team newteam)
     {
-       if (newteam != null)
-       {
+        if (newteam != null)
+        {
            teamList.add(newteam);
            return true;
         }
-       return false;
-       
+        return false;       
     }
     
     public void addfair(int a)
     {
-        getTeams().get(a).setFair(getTeams().get(a).getYellow()+getTeams().get(a).getRed()*2);
-    
+        getTeams().get(a).setFair(getTeams().get(a).getYellow()+getTeams().get(a).getRed()*2);    
     }
     
     public void addwin (int win,int drawn, int lose, int y , int r ,int goal ,int a)
@@ -51,16 +46,14 @@ public class Database
         getTeams().get(a).setPlayer2goal(goal2);
     }
     
-    
     public void addpoint(int point ,int a)
     {
-         getTeams().get(a).setPoint(point);
+        getTeams().get(a).setPoint(point);
     }
 
-    
     public ArrayList<Team> getTeams()
     {
-       return teamList;
+        return teamList;
     }
    
 

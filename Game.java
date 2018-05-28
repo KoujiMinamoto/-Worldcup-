@@ -1,7 +1,6 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-
 public class Game
 {
     private Database newteamList;
@@ -35,24 +34,19 @@ public class Game
             ArrayList<Team> resultList = newteamList.getTeams();
             System.out.println("Please insert playername for "+ resultList.get(i).getName()); 
             SetPlayerName(i);
-            i++;
-        
-        }
-                
+            i++;        
+        }                
         Scanner input = new Scanner(System.in);
         while (!exit)
         {
             menu.displaymenu();
-
             //insert case
             String iobuffer = input.nextLine(); 
-            System.out.println("");
-            
+            System.out.println(" ");            
             if (validBlank(iobuffer))
             { 
                 String iobuffer1 = iobuffer.toUpperCase();
                 char option = iobuffer1.charAt(0);
-
                 switch(option)
                 {
                     case 'A': Preliminary();
@@ -85,8 +79,8 @@ public class Game
                             exit = true;
                             System.out.println("Goodbye. ");
                             break; 
+                }
             }
-          }
          }
     }
     
@@ -129,9 +123,8 @@ public class Game
         }
         else
         {
-        
+            
         }
-        
         reda = Random.GenerateRandomNumber(1);
         yellowa = Random.GenerateRandomNumber(4);
         redb = Random.GenerateRandomNumber(1);
@@ -156,7 +149,6 @@ public class Game
         goalforb = Random.GenerateRandomNumber(goalb);
         newteamList.addgoal(goalfora,goala-goalfora,a);
         newteamList.addgoal(goalforb,goalb-goalforb,b);
-        
         b++;
         }
         a++;
@@ -178,17 +170,13 @@ public class Game
             if(validplayername(newname1)==false)
             {
                 System.out.println("use default name:");
-                newname = newteamList.getTeams().get(numberofteam).getName()+"-1-player";
-                
+                newname = newteamList.getTeams().get(numberofteam).getName()+"-1-player";                
             }
             else
             {
                 newname = newname1;
-            }
-        
+            }        
         }
-
-        
         System.out.println("=== Add Player ===");
         System.out.println("Please insert 2st playername:"); 
         String new2name = input.nextLine();
@@ -201,16 +189,12 @@ public class Game
             {
                 System.out.println("use default name:");
                 new2name = newteamList.getTeams().get(numberofteam).getName()+"-2-player";
-                
             }
             else
             {
                 new2name = newname2;
             }
-            
-        
         }
-
         newteamList.addplayer(newname,new2name,numberofteam);
     }
     
@@ -221,79 +205,68 @@ public class Game
         ArrayList<Team> resultList = newteamList.getTeams();
         while(a<=3)
         {
-            totalpoint = (resultList.get(a).getWon()*3+resultList.get(a).getDrawn());
+            totalpoint = (resultList.get(a).getWon() * 3 + resultList.get(a).getDrawn());
             newteamList.addpoint(totalpoint,a);
             a++;
-        }
-    
+        }    
     }
     
     public void sort() 
     {
         ArrayList<Team> sortlist = newteamList.getTeams();
         Team sort;
-        for(int a=0;a<3;a++)
+        for(int a = 0; a < 3; a++)
         {
-            for(int b=1;b<4-a;b++)
+            for(int b = 1;b < 4 - a; b++)
             {
-                if(sortlist.get(b-1).getPoint() > sortlist.get(b).getPoint())
+                if(sortlist.get(b - 1).getPoint() > sortlist.get(b).getPoint())
                 {
                     sort = sortlist.get(b-1);
                     newteamList.getTeams().set((b-1),sortlist.get(b));
                     newteamList.getTeams().set(b,sort);
-                
-                }
-                
-                if(sortlist.get(b-1).getPoint() == sortlist.get(b).getPoint())
+                }                
+                if(sortlist.get(b - 1).getPoint() == sortlist.get(b).getPoint())
                 {
-                    if(sortlist.get(b-1).getGoal() > sortlist.get(b).getGoal())
+                    if(sortlist.get(b - 1).getGoal() > sortlist.get(b).getGoal())
                     {
-                        sort =  sort = sortlist.get(b-1);
-                        newteamList.getTeams().set((b-1),sortlist.get(b));
+                        sort = sort = sortlist.get(b - 1);
+                        newteamList.getTeams().set((b - 1),sortlist.get(b));
                         newteamList.getTeams().set(b,sort);
-                    }
-                    
-                    if(sortlist.get(b-1).getGoal() == sortlist.get(b).getGoal())
+                    }                    
+                    if(sortlist.get(b - 1).getGoal() == sortlist.get(b).getGoal())
                     {
                         int random = Random.GenerateRandomNumber(1);
                         if(random == 1)
                         {
-                            sort =  sort = sortlist.get(b-1);
-                            newteamList.getTeams().set((b-1),sortlist.get(b));
-                            newteamList.getTeams().set(b,sort);
-                        
-                        
+                            sort = sort = sortlist.get(b - 1);
+                            newteamList.getTeams().set((b - 1),sortlist.get(b));
+                            newteamList.getTeams().set(b,sort);                        
                         }
-                        
                     }
                 }
             }
         }
-
     }
     
     public void sortFair() 
     {
-        for(int a=0;a<4;a++)
+        for(int a = 0; a < 4; a++)
         {
             newteamList.addfair(a);
         }
         ArrayList<Team> sortlist = newteamList.getTeams();
         ArrayList<Team> sortfairlist = sortlist;
         Team sort;
-        for(int a=0;a<3;a++)
+        for(int a = 0; a < 3; a++)
         {
             for(int b=1;b<4-a;b++)
             {
-                if(sortlist.get(b-1).getFair() > sortlist.get(b).getFair())
+                if(sortlist.get(b - 1).getFair() > sortlist.get(b).getFair())
                 {
                     sort = sortlist.get(b-1);
                     sortfairlist.set((b-1),sortlist.get(b));
                     sortfairlist.set(b,sort);
-                
                 }
-                 
-                
             }
         }
         
@@ -301,14 +274,13 @@ public class Game
         {
             if(sortfairlist.get(1).getFair() == sortfairlist.get(2).getFair())
             {
-                FairPlayAward = sortfairlist.get(0).getName()+" and "+ sortfairlist.get(1).getName()+" and "+ sortfairlist.get(2).getName();
+                FairPlayAward = sortfairlist.get(0).getName() + " and " + sortfairlist.get(1).getName() + " and " + sortfairlist.get(2).getName();
             }
             else
-            FairPlayAward = sortfairlist.get(0).getName()+" and "+ sortfairlist.get(1).getName();
+                FairPlayAward = sortfairlist.get(0).getName() + " and " + sortfairlist.get(1).getName();
         }
         else
-        FairPlayAward = sortfairlist.get(0).getName();
-
+            FairPlayAward = sortfairlist.get(0).getName();
     }
     
     public void sortPlayer()
@@ -316,30 +288,29 @@ public class Game
         ArrayList<Player> sortplayerList;
         sortplayerList = new ArrayList<Player>() ;
         Player sortplayer;
-        for(int a=0;a<4;a++)
+        for(int a = 0; a < 4; a++)
         {
              sortplayer = new Player();
-             sortplayer.setName(newteamList.getTeams().get(a).getPlayer1name()+" ("+newteamList.getTeams().get(a).getName()+")");
+             sortplayer.setName(newteamList.getTeams().get(a).getPlayer1name() + " ("+newteamList.getTeams().get(a).getName() + ")");
              sortplayer.setGoals(newteamList.getTeams().get(a).getPlayer1());
              sortplayerList.add(sortplayer);
         
              sortplayer = new Player();
-             sortplayer.setName(newteamList.getTeams().get(a).getPlayer2name()+" ("+newteamList.getTeams().get(a).getName()+")");
+             sortplayer.setName(newteamList.getTeams().get(a).getPlayer2name() + " (" + newteamList.getTeams().get(a).getName() + ")");
              sortplayer.setGoals(newteamList.getTeams().get(a).getPlayer2());
              sortplayerList.add(sortplayer);
         }
         Player sort;
         ArrayList<Player> sortlist = sortplayerList ;
-        for(int a=0;a<7;a++)
+        for(int a = 0; a < 7; a++)
         {
-            for(int b=1;b<8-a;b++)
+            for(int b = 1; b < 8-a; b++)
             {
                 if(sortlist.get(b-1).getGoals() > sortlist.get(b).getGoals())
                 {
                    sort = sortlist.get(b-1);
                    sortplayerList.set((b-1),sortlist.get(b));
                    sortplayerList.set(b,sort);
-                
                 }
             }
         }
@@ -348,18 +319,18 @@ public class Game
         {
             if(sortplayerList.get(6).getGoals() == sortplayerList.get(5).getGoals())
             {
-                goldenboot = sortplayerList.get(7).getName()+" and "+ sortplayerList.get(6).getName()+" and "+ sortplayerList.get(5).getName();
+                goldenboot = sortplayerList.get(7).getName() + " and " + sortplayerList.get(6).getName() + " and " + sortplayerList.get(5).getName();
             }
             else
-            goldenboot = sortplayerList.get(7).getName()+" and "+ sortplayerList.get(6).getName();
+                goldenboot = sortplayerList.get(7).getName() + " and " + sortplayerList.get(6).getName();
         }
         else
         goldenboot = sortplayerList.get(7).getName();
-        if(A==false)
+        if(A == false)
         {
-          for(int i=7;i>=0;i--)
+          for(int i = 7; i >= 0; i--)
           {
-            player=(player+"\n"+sortplayerList.get(i).getName() + " - " +sortplayerList.get(i).getGoals()+"\n" );
+            player = (player+"\n"+sortplayerList.get(i).getName() + " - " + sortplayerList.get(i).getGoals() + "\n" );
           }
         }
     }
@@ -380,20 +351,17 @@ public class Game
         if(resultList.get(a).getRank() > resultList.get(b).getRank())
         {
             goala = Random.GenerateRandomNumber(5-resultList.get(a).getRank()+resultList.get(b).getRank()+Random.GenerateRandomNumber(2));
-            goalb = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
-            
+            goalb = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));        
         }
         else if(resultList.get(a).getRank() < resultList.get(b).getRank())
         {
             goalb = Random.GenerateRandomNumber(5-resultList.get(b).getRank()+resultList.get(a).getRank()+Random.GenerateRandomNumber(2));
-            goala = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));
-        
+            goala = Random.GenerateRandomNumber(5+Random.GenerateRandomNumber(2));        
         }
         else
         {
         
         }
-        
         reda = Random.GenerateRandomNumber(1);
         yellowa = Random.GenerateRandomNumber(4);
         redb = Random.GenerateRandomNumber(1);
@@ -421,54 +389,47 @@ public class Game
         goalforb = Random.GenerateRandomNumber(goalb);
         newteamList.addgoal(goalfora,goala-goalfora,a);
         newteamList.addgoal(goalforb,goalb-goalforb,b);
-        
-    
-    
-    
     }
     
     public void displayGameResult(String teama, String teamb , int goala, int goalb ,int reda ,int redb ,int yellowa, int yellowb)
     {
         System.out.println(teama + goala +" vs. " +teamb + goalb);
-        if(yellowa>0)
+        if(yellowa > 0)
         {
             if(reda == 0)
             {
-                System.out.println("Cards awarded:"+ teama + "-" + yellowa + "yellowcard");
+                System.out.println("Cards awarded:" + teama + "-" + yellowa + "yellowcard");
             }
             else
-            {
-            System.out.println("Cards awarded:"+ teama + "-" + yellowa + "yellowcard  " + reda +"redcard" );
+            {                
+                System.out.println("Cards awarded:" + teama + "-" + yellowa + "yellowcard  " + reda + "redcard" );
             }
         }
-        if(yellowb>0)
+        if(yellowb > 0)
         {
             if(redb == 0)
             {
-                System.out.println("Cards awarded:"+ teamb + "-" + yellowb + "yellowcard");
+                System.out.println("Cards awarded:" + teamb + "-" + yellowb + "yellowcard");
             }
             else
             {
-            System.out.println("Cards awarded:"+ teamb + "-" + yellowb + "yellowcard  " + redb +"redcard" );
+                System.out.println("Cards awarded:" + teamb + "-" + yellowb + "yellowcard  " + redb +"redcard" );
             }
         }
-    
-    
     }
     
     public void  playPenaltyShootOut(int a ,int b)
     {
-        int a1,b1= 0;
-        a1 =Random.GenerateRandomNumber(5);
-        b1 =Random.GenerateRandomNumber(5);
-        
-        if(a1>b1)
+        int a1,b1 = 0;
+        a1 = Random.GenerateRandomNumber(5);
+        b1 = Random.GenerateRandomNumber(5);        
+        if(a1 > b1)
         {
             winner = newteamList.getTeams().get(a).getName();
             newteamList.addwin(1,0,0,0,0,0,a);
             newteamList.addwin(0,0,1,0,0,0,b);
         }
-        else if(a1<b1)
+        else if(a1 < b1)
         {
             winner = newteamList.getTeams().get(b).getName();
             newteamList.addwin(0,0,1,0,0,0,a);
@@ -476,24 +437,23 @@ public class Game
         }
         else
         {
-            while(a1==b1)
+            while(a1 == b1)
             {
-                a1 =Random.GenerateRandomNumber(1);
-                b1 =Random.GenerateRandomNumber(1);
+                a1 = Random.GenerateRandomNumber(1);
+                b1 = Random.GenerateRandomNumber(1);
             }
-            if(a1>b1)
+            if(a1 > b1)
             {
                 winner = newteamList.getTeams().get(a).getName();
                 newteamList.addwin(1,0,0,0,0,0,a);
                 newteamList.addwin(0,0,1,0,0,0,b);
             }
-            else if(a1<b1)
+            else if(a1 < b1)
             {
                 winner = newteamList.getTeams().get(b).getName();
                 newteamList.addwin(0,0,1,0,0,0,a);
                 newteamList.addwin(1,0,0,0,0,0,b);
-            }
-        
+            }        
         }
         System.out.println("winner is :"+ winner );
     }
@@ -502,8 +462,7 @@ public class Game
     {
         String filename = ("team.txt");
         String teams;
-        Team loadFromFile;
-        
+        Team loadFromFile;        
         try
         {
             FileReader inputFile = new FileReader(filename);
@@ -514,13 +473,9 @@ public class Game
                 loadFromFile = new Team(); 
                 teams = parser.nextLine();
                 String[] attribute = teams.split(",");
-
-
-
                 System.out.println ("Team"+ (linecount+1));
                 loadFromFile.setName(attribute[0]);
                 loadFromFile.setRank(convertStringtoInt(attribute[1]));
-
                 loadFromFile.displayTeamrecord();
                 newteamList.addteam(loadFromFile);
                 linecount++; 
@@ -539,16 +494,16 @@ public class Game
     
     public void display()
     {   
-        System.out.println("Name    played  won  lost  drawn  goals  points  fairplay");
-        for(int a=3;a>=0;a--)
+        System.out.println("Name     played  won  lost  drawn  goals  points  fairplay");
+        for(int a = 3; a >= 0; a--)
         {
             ArrayList<Team> resultList = newteamList.getTeams();
-            String name =resultList.get(a).getName();
+            String name = resultList.get(a).getName();
             int played = resultList.get(a).getWon()+resultList.get(a).getDrawn()+resultList.get(a).getLost();
             int fair = resultList.get(a).getRed()*2+resultList.get(a).getYellow();
 
-            System.out.println("\n"+name+"   "+played+"    "+resultList.get(a).getWon()+"    "+resultList.get(a).getDrawn()+"    "+resultList.get(a).getLost()+"    "+resultList.get(a).getGoal()+"    "+resultList.get(a).getPoint()+"    "+fair);
-            team=(team + "\n"+ name+"   "+played+"    "+resultList.get(a).getWon()+"    "+resultList.get(a).getDrawn()+"    "+resultList.get(a).getLost()+"    "+resultList.get(a).getGoal()+"    "+resultList.get(a).getPoint()+"    "+fair+"\n");
+            System.out.println("\n" + name + "   " + played + "    " + resultList.get(a).getWon() + "    " + resultList.get(a).getDrawn() + "    " + resultList.get(a).getLost() + "    " + resultList.get(a).getGoal() + "    " + resultList.get(a).getPoint() + "    " + fair);
+            team=(team + "\n"+ name + "   " + played + "    " + resultList.get(a).getWon() + "    " + resultList.get(a).getDrawn() + "    " + resultList.get(a).getLost() + "    " + resultList.get(a).getGoal() + "    " + resultList.get(a).getPoint() + "    " + fair+"\n");
         }
     }
     
@@ -601,8 +556,7 @@ public class Game
     private boolean validplayername(String iobuffer) //method to check insert any empties or blanks
     {
         if (iobuffer.matches("[a-zA-z\\-]*"))
-        {
-           
+        {           
             if (iobuffer.trim().isEmpty() || iobuffer.length() < 2)
             {
                 System.out.println("Error : please insert more than 2!");
@@ -613,25 +567,24 @@ public class Game
             int count = 0;
             for (position = 0; position < iobuffer.length(); position++)
             {
-            if (iobuffer.charAt(position) == hyphen)
-            {
-                count++;
-                if (count > 1)
+                if (iobuffer.charAt(position) == hyphen)
+                {
+                    count++;
+                    if (count > 1)
                     return false;
-            }
-            if (iobuffer.charAt(0) == hyphen || iobuffer.charAt(iobuffer.length() - 1) == hyphen)
-            {
-                return false;
-            }           
+                }
+                if (iobuffer.charAt(0) == hyphen || iobuffer.charAt(iobuffer.length() - 1) == hyphen)
+                {
+                    return false;
+                }           
             }
             return true;
-
-         }
-         else
-         {
-             System.out.println("Error: opition shouldn't be #!123...Please enter again:");
-             return false;
-         }
+        }
+        else
+        {
+            System.out.println("Error: opition shouldn't be #!123...Please enter again:");
+            return false;
+        }
     }
     
     /*public boolean isHyphen(String newPlayerName)
@@ -657,14 +610,14 @@ public class Game
     
     private void writeFile()
     {
-         String filename = ("statistics.txt");
+        String filename = ("statistics.txt");
         //try catch to handle IOException
         try
         {
             PrintWriter outputFile = new PrintWriter (filename);
-            outputFile.println("Football World Cup Winner: "+winner);
-            outputFile.println("Golden Boot Award: "+goldenboot);
-            outputFile.println("Fair Play Award: "+FairPlayAward);
+            outputFile.println("Football World Cup Winner: " + winner);
+            outputFile.println("Golden Boot Award: " + goldenboot);
+            outputFile.println("Fair Play Award: " + FairPlayAward);
             outputFile.close();    
         }
         catch(IOException exception)

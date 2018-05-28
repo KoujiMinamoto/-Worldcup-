@@ -1,13 +1,11 @@
 import java.util.*;
-
 public class Team
 {
    private String name ;
    private int rank, redcards, yellowcards,won,lost,drawn, goals,point,Fair;
    Player player1 = new Player();
    Player player2 = new Player();
-   
-   
+      
    public Team()
    {
       name = "";
@@ -22,6 +20,19 @@ public class Team
       Fair = 0;
    }
   
+   public Team(String newTeamName, int newRank)
+   {
+      name = newTeamName;
+      rank = newRank;
+      redcards = 0;
+      yellowcards = 0;
+      won = 0;
+      lost = 0;
+      drawn = 0;
+      goals = 0;
+      point = 0;
+      Fair = 0;
+   }
    
    public void displayTeamrecord()
    {
@@ -39,7 +50,7 @@ public class Team
        return name;
    }
     
-    public void setRank(int TeamRank)
+   public void setRank(int TeamRank)
    {
        rank = TeamRank;
    }
@@ -58,6 +69,7 @@ public class Team
    {
        return redcards;
    }
+   
    public void setYellow(int TeamYellow)
    {
        yellowcards = TeamYellow;
